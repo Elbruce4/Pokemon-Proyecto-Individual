@@ -23,9 +23,10 @@ const pokeApi = async () => {
         let ArrayPoke = [];
         let pokemon = await axios.get("https://pokeapi.co/api/v2/pokemon");
         let dataPoke = pokemon.data.results.map(obj => axios.get(obj.url));
-        /* let otrosPokemon = await axios.get(pokemon.data.next)
-        let dataOtros = otrosPokemon.data.results.map(obj => axios.get(obj.url)) */
-        let promises = await Promise.all(dataPoke).then(obj => {
+        let otrosPokemon = await axios.get(pokemon.data.next)
+        let dataOtros = otrosPokemon.data.results.map(obj => axios.get(obj.url))
+        let todosPoke = dataPoke.concat(dataOtros)
+        let results = await Promise.all(todosPoke).then(obj => {
             obj.map(e=>{
                 ArrayPoke.push({
                     ID : e.data.id.toString(),
@@ -36,13 +37,15 @@ const pokeApi = async () => {
                     speed : e.data.stats[5].base_stat,
                     height : e.data.height,
                     weight : e.data.weight,
-                    type : e.data.types.map(el => el)
+                    type : e.data.types.map(el => el),
+                    img : e.data.sprites.front_shiny,
+                    //types : e.data.types(obj => obj)
                 })
             })
             return ArrayPoke;
         })
         
-        return promises;
+        return results;
 
     } catch (e) {
         return e;
@@ -127,19 +130,30 @@ router.post("/pokemons" , async (req,res) => {
     let {name, life , strong, defense, speed, height, weight, types} = req.body;
     try {
         if(name){
-            let newPoke = await Pokemon.create({
-                name : name.toLowerCase(), life , strong, defense, speed, height, weight
-            })
 
-            let type = await Type.findOrCreate({
-                where : {
-                    name : types
-                }
-            })
+            const allPoke = await getAllPoke()
+            const isPoke = allPoke.find(obj => obj.name === name.toLowerCase());
 
-            newPoke.addType(type[0])
+            if(!isPoke){            
+    
+                let newPoke = await Pokemon.create({
+                    name : name.toLowerCase(), life , strong, defense, speed, height, weight
+                })
+    
+                let type = await Type.findOrCreate({
+                    where : {
+                        name : types
+                    }
+                })
+    
+                newPoke.addType(type[0])
+    
+                res.send(newPoke);
 
-            res.send(newPoke)
+            } else {
+                res.send("Ya existe un Pokemon con ese nombre")
+            }
+
         } else {
             res.send("Envía un nombre por BODY")
         }
