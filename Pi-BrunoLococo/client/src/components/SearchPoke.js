@@ -5,9 +5,8 @@ import { useDispatch , useSelector } from "react-redux";
 const SearchPoke = () => {
 
     let poke = useSelector(obj => obj.pokemon)
-    let pokemons = useSelector(obj => obj.pokemons)
 
-    useEffect(()=> console.log(poke ,pokemons) , [poke])
+    useEffect(()=> console.log(poke) , [poke])
 
     return (
         <div>

@@ -127,7 +127,9 @@ router.get("/types" , async (req,res) => {
 })
 
 router.post("/pokemons" , async (req,res) => {
-    let {name, life , strong, defense, speed, height, weight, types} = req.body;
+    
+    let {name, life , strong, defense, speed, height, weight, types , img} = req.body;
+
     try {
         if(name){
 
@@ -137,7 +139,7 @@ router.post("/pokemons" , async (req,res) => {
             if(!isPoke){            
     
                 let newPoke = await Pokemon.create({
-                    name : name.toLowerCase(), life , strong, defense, speed, height, weight
+                    name : name.toLowerCase(), life , strong, defense, speed, height, weight , img
                 })
     
                 let type = await Type.findOrCreate({

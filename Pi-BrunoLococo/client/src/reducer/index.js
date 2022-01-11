@@ -17,6 +17,11 @@ function rootReducer (state = initialState , action) {
                 ...state,
                 pokemon : action.payload
             }
+        case "CREATE_POKE":
+            return {
+                ...state,
+                pokemons : state.pokemons.concat(action.payload)
+            }
             default: return {...state};
     }
     

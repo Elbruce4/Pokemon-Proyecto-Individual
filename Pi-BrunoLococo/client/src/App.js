@@ -4,6 +4,7 @@ import React from 'react';
 import {Route , Link} from "react-router-dom"
 import SearchPoke from './components/SearchPoke';
 import NavBar from "./components/Nav"
+import CreatePoke from './components/CreatePoke';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       
       <Route path="/search" component={SearchPoke}/>
       <Route path="/home" component={Home}/>
+      <Route path="/create" component={CreatePoke}></Route>
     </div>
   );
 }

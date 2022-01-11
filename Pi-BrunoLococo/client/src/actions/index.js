@@ -25,3 +25,31 @@ export function getOnePoke (name) {
             }))
     }
 }
+
+export function createPoke (data) {
+    return function (dispatch) {
+        console.log("entro")
+        return fetch("http://localhost:3001/pokemons", {
+            method : "POST",
+            body : JSON.stringify({
+                //name, life , strong, defense, speed, height, weight, types
+                name : data.name,
+                life : data.life,
+                types : data.types,
+                speed : data.speed,
+                strong : data.strong,
+                defense : data.defense,
+                weight : data. weight,
+                height : data.height
+                }),
+            headers : {
+                "Content-type" : "application/json"
+            }
+            })  
+            .then(obj => obj.json())
+            .then(obj=> dispatch({
+                type : "CREATE_POKE",
+                payload : obj
+            }))
+    }
+}
