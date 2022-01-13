@@ -37,7 +37,7 @@ const pokeApi = async () => {
                     speed : e.data.stats[5].base_stat,
                     height : e.data.height,
                     weight : e.data.weight,
-                    type : e.data.types.map(el => el),
+                    types : e.data.types.map(el => el.type),
                     img : e.data.sprites.front_shiny,
                     //types : e.data.types(obj => obj)
                 })
@@ -110,7 +110,7 @@ router.get("/types" , async (req,res) => {
         }).catch(e => console.log(e));
     
         const types = arrayTypes.map( async (obj) => {
-            await Type.findOrCreate({
+            return await Type.findOrCreate({
                 where : {
                     name : obj
                 }
@@ -119,7 +119,9 @@ router.get("/types" , async (req,res) => {
             }); */
         })
 
-        res.status(200).send(arrayTypes)
+        const allTypes = await Type.findAll()
+
+        res.status(200).send(allTypes)
         
     } catch (e) {
         res.send(e)

@@ -16,9 +16,11 @@ const CreatePoke = () => {
         speed : "",
         height : "",
         weight : "",
+        PokeImagen : "",
     })
 
     function HandleChange (e) {
+        
         setForm({
             ...form, [e.target.name] : e.target.value
         })

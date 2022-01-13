@@ -40,7 +40,8 @@ export function createPoke (data) {
                 strong : data.strong,
                 defense : data.defense,
                 weight : data. weight,
-                height : data.height
+                height : data.height,
+                img : data.img
                 }),
             headers : {
                 "Content-type" : "application/json"
@@ -51,5 +52,30 @@ export function createPoke (data) {
                 type : "CREATE_POKE",
                 payload : obj
             }))
+    }
+}
+
+export function getTypes () {
+    return function (dispatch) {
+        fetch("http://localhost:3001/types")
+            .then(obj=> obj.json())
+            .then(obj=> dispatch({
+                type : "GET_TYPES",
+                payload : obj
+            }))
+    }
+}
+
+export function filterByType (type) {
+    return {
+        type : "FILTER_BY_TYPE",
+        payload : type
+    }
+}
+
+export function filterByOrigin (origin) {
+    return {
+        type : "FILTER_BY_ORIGIN",
+        payload : origin
     }
 }
