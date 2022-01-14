@@ -6,6 +6,8 @@ import Pokemon from "./Pokemon"
 import { Link } from "react-router-dom"
 import Paginado from "./Paginado"
 import cargando from "../pics/cargando.gif"
+import NavBar from "./Nav"
+
 
 const Home = () => {
 
@@ -77,6 +79,7 @@ const Home = () => {
 
     return (
         <div>
+            <NavBar/>
             <input type="text" placeholder="Buscar nombre exacto" onChange={handleChange}/>
             <Link to="/search">
                 <button onClick={handleClick}>Buscar Pokemones</button>

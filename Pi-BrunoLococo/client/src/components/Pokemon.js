@@ -1,3 +1,4 @@
+import "./Pokemon.css"
 
 const Pokemon = ({name , life , strong , defense, speed , weight , height , img, types}) => {
     
@@ -9,7 +10,7 @@ const Pokemon = ({name , life , strong , defense, speed , weight , height , img,
             <br />
             Tipo/s : {types.map(obj => obj.name + "  ")}
             <br />
-            <img src={img} alt="pokemon" />
+            <img src={img} alt="pokemon" className="img"/>
             <br />
         </div>
     )

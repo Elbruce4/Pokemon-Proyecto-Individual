@@ -7,9 +7,6 @@ const NavBar = () => {
             <Link to="create">
                 <p>Create Poke</p>
             </Link>
-            <Link to="/home">
-                <h1>Henry Pokemon</h1>
-            </Link>
         </div>
     )
 }

@@ -51,6 +51,12 @@ const CreatePoke = () => {
         console.log(form)
     }
 
+    /* function quitarType (e) {
+        e.preventDefault()
+        console.log(e.target.value)
+        form.types.filter(obj => obj !== e.target.value)
+    } */
+
     return (
         <div>
             <form action="">
@@ -76,7 +82,7 @@ const CreatePoke = () => {
                 <input name="weight" onChange={HandleChange} type="number" />
                 <br />
                 <label >PokeImagen</label>
-                <input name="img" onChange={HandleChange} type="url" />
+                <input name="img" onChange={HandleChange} type="url" placeholder="Coloca la URL de la imagen"/>
                 <br />
                 <select onClick={handleTypes}>
                     <option value="ignore">Selecciones los tipos</option>
@@ -85,9 +91,11 @@ const CreatePoke = () => {
                     }
                 </select>
                 <div>
-                    {form.types.map(obj => obj + " ")}
+                    {form.types.map(obj => 
+                            obj + " "
+                    )}
                 </div>
-                <button type="submit" onClick={handleClick}>Crear Koke</button>
+                <button type="submit" onClick={handleClick}>Crear Poke</button>
             </form>
         </div>
     )

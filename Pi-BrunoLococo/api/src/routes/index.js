@@ -38,7 +38,7 @@ const pokeApi = async () => {
                     height : e.data.height,
                     weight : e.data.weight,
                     types : e.data.types.map(el => el.type),
-                    img : e.data.sprites.front_shiny,
+                    img : e.data.sprites.other.dream_world.front_default,
                     createdInDb : false
                     //types : e.data.types(obj => obj)
                 })
@@ -144,23 +144,15 @@ router.post("/pokemons" , async (req,res) => {
                 let newPoke = await Pokemon.create({
                     name : name.toLowerCase(), life , strong, defense, speed, height, weight , img
                 })
-    
-                let type = await Type.findOrCreate({
-                    where : {
-                        name : types
-                    }
-                })
-    
-                newPoke.addType(type[0])
 
                 console.log(types)
 
-                /* types.map (obj => 
-                    await Type.findAll({
+                types.map (async obj => 
+                    await Type.findOne({
                         where : {
                             name : obj
                         }
-                }).then(obj => newPoke.addType(obj))) */
+                }).then(obj => newPoke.addType(obj)))
     
                 res.send(newPoke);
 

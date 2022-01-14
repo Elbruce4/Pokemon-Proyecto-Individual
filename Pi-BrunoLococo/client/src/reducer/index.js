@@ -22,7 +22,7 @@ function rootReducer (state = initialState , action) {
                 pokemon : action.payload
             }
         case "CREATE_POKE":
-            
+
             return {
                 ...state,
                 pokemons : state.pokemons.concat(action.payload)
@@ -34,8 +34,9 @@ function rootReducer (state = initialState , action) {
             }
         case "FILTER_BY_TYPE":
             let pokes = state.allPokemons;
-            let filterByType = action.payload === " " ? state.allPokemons : pokes.filter(obj => action.payload === obj.types[0].name);
-            //let filterByType = pokes.filter(obj => obj.types.name.includes(action.payload))
+            let filterByType = action.payload === " " ? state.allPokemons : 
+            pokes.filter(obj => 
+                obj.types.map(obj => obj.name).includes(action.payload))
             return {
                 ...state,
                 pokemons : filterByType
