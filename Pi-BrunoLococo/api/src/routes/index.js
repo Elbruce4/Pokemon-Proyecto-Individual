@@ -10,7 +10,7 @@ console.log(Type);
 const pokeDB = async () => {
     try{
         return await Pokemon.findAll({
-            include : Type
+            include : Type,
         })
     } catch (e) {
         return e
@@ -39,6 +39,7 @@ const pokeApi = async () => {
                     weight : e.data.weight,
                     types : e.data.types.map(el => el.type),
                     img : e.data.sprites.front_shiny,
+                    createdInDb : false
                     //types : e.data.types(obj => obj)
                 })
             })
@@ -151,6 +152,15 @@ router.post("/pokemons" , async (req,res) => {
                 })
     
                 newPoke.addType(type[0])
+
+                console.log(types)
+
+                /* types.map (obj => 
+                    await Type.findAll({
+                        where : {
+                            name : obj
+                        }
+                }).then(obj => newPoke.addType(obj))) */
     
                 res.send(newPoke);
 

@@ -1,13 +1,11 @@
 import React from "react"
 import { useEffect , useState } from "react"
 import { useDispatch , useSelector , connect } from "react-redux"
-import { getAllPoke , getOnePoke } from "../actions"
+import { getAllPoke , getOnePoke , getTypes , filterByType , filterByOrigin  , filterByName , filterByStrong } from "../actions"
 import Pokemon from "./Pokemon"
 import { Link } from "react-router-dom"
 import Paginado from "./Paginado"
-import { getTypes } from "../actions"
-import { filterByType } from "../actions"
-import { filterByOrigin } from "../actions"
+import cargando from "../pics/cargando.gif"
 
 const Home = () => {
 
@@ -29,6 +27,7 @@ const Home = () => {
     let dispatch = useDispatch();
 
     let [onePoke , setOnePoke] = useState();
+    let [refresh , setRefresh] = useState()
     
     useEffect(()=>{
 
@@ -40,8 +39,6 @@ const Home = () => {
 
         dispatch(getAllPoke());
         //dispatch(getTypes());
-        console.log(pokemons);
-        console.log(pokeTypes);
 
     },[dispatch]);
 
@@ -52,15 +49,30 @@ const Home = () => {
 
     function handleClick () {
         dispatch(getOnePoke(onePoke))
+        //getOnePoke()
     }
 
     function handleFilterByType (e) {
         console.log(e.target.value)
         dispatch(filterByType(e.target.value))
+        setPaginaActual(1)
     }
 
     function handleFilterByOrigin (e) {
-        dispatch(filterByOrigin(e.target.value))
+        dispatch(filterByOrigin(e.target.value));
+        setPaginaActual(1)
+    }
+
+    function handleFilterByName (e) {
+        dispatch(filterByName(e.target.value));
+        setPaginaActual(1)
+        setRefresh("Ordenado por " + e.target.value)
+    }
+
+    function handleFilterByStrong (e) {
+        dispatch(filterByStrong(e.target.value));
+        setPaginaActual(1)
+        setRefresh("Ordenado por " + e.target.value)
     }
 
     return (
@@ -70,16 +82,23 @@ const Home = () => {
                 <button onClick={handleClick}>Buscar Pokemones</button>
             </Link>
             <div>
-                <select name="" id="">
-                    <option value="">A-Z</option>
-                    <option value="">Z-A</option>
+                <select onClick={handleFilterByName}>
+                    <option value="asc">A-Z</option>
+                    <option value="desc">Z-A</option>
                 </select>
                 <select onClick={handleFilterByOrigin}>
+                    <option value=" ">Filtrar por creación</option>
                     <option value="All">Todos</option>
                     <option value="Db">Creado en DB</option>
                     <option value="Api">Poke existente</option>
                 </select>
+                <select name="" id="" onClick={handleFilterByStrong}>
+                    <option value=" ">Ordenar por fuerza</option>
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                </select>
                 <select onClick={handleFilterByType}>
+                    <option value=" ">Todos</option>
                 {
                     pokeTypes && pokeTypes.map(obj=>{
                         return <option value={obj.name}  key={obj.id}>{obj.name}</option>
@@ -95,8 +114,8 @@ const Home = () => {
             {
                 pokemonesActuales.length > 0 ? pokemonesActuales.map(obj=>{
                    return <Pokemon name={obj.name} life={obj.life} strong={obj.strong} defense={obj.defense} speed={obj.speed} 
-                   height={obj.height} weight={obj.weight} key={obj.ID} img={obj.img} types={obj.type}/>
-                }) : <h5>"Cargando..."</h5>
+                   height={obj.height} weight={obj.weight} key={obj.ID} img={obj.img} types={obj.types}/>
+                }) : <img src={cargando}/>
             }
             
         </div>

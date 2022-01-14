@@ -79,3 +79,24 @@ export function filterByOrigin (origin) {
         payload : origin
     }
 }
+
+export function filterByName (value) {
+    return {
+        type : "FILTER_BY_NAME",
+        payload : value
+    }
+} 
+
+export function filterByStrong (value) {
+    return {
+        type : "FILTER_BY_STRONG",
+        payload : value
+    }
+} 
+
+export function cleanSearch () {
+    return {
+        type : "CLEAN_SEARCH",
+        payload : {}
+    }
+}
