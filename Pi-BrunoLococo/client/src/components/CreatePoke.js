@@ -2,10 +2,12 @@ import React from "react"
 import { useState , useEffect} from "react"
 import { useDispatch , useSelector } from "react-redux"
 import { createPoke , getTypes } from "../actions"
+import {useHistory} from "react-router-dom"
 
 const CreatePoke = () => {
 
     let dispatch = useDispatch();
+    let history = useHistory()
     let types = useSelector(obj => obj.types)
 
     let [form , setForm] = useState({
@@ -20,8 +22,21 @@ const CreatePoke = () => {
         img : "",
     })
 
+    let [err , setErr] = useState({});
+
+    const validate = (form) => {
+        let errors = {}
+        if(!form.name){
+            errors.name = "Name is required"
+        }
+        return errors
+    }
+
     useEffect (()=>{
+
         dispatch(getTypes())
+        console.log(err)
+
     },[])
 
     function HandleChange (e) {
@@ -30,6 +45,10 @@ const CreatePoke = () => {
             ...form, [e.target.name] : e.target.value
         })
         console.log(form);
+        setErr(validate({
+            ...form , [e.target.name] : e.target.value
+        }))
+        console.log(err)
     }
 
     function handleTypes (e) {
@@ -48,7 +67,9 @@ const CreatePoke = () => {
     function handleClick (e) {
         e.preventDefault();
         dispatch(createPoke(form));
-        console.log(form)
+        console.log(form);
+        alert("¡Pokemon Creado!")
+        history.push("/home")
     }
 
     /* function quitarType (e) {
@@ -62,6 +83,9 @@ const CreatePoke = () => {
             <form action="">
                 <label >PokeName</label>
                 <input name="name" onChange={HandleChange} type="text" value={form.name} />
+                {
+                    err.hasOwnProperty("name") ? <p>{err.name}</p> : null
+                }
                 <br />
                 <label >PokeLife</label>
                 <input name="life" onChange={HandleChange} type="number" />
@@ -92,10 +116,13 @@ const CreatePoke = () => {
                 </select>
                 <div>
                     {form.types.map(obj => 
-                            obj + " "
+                            obj + ", "
                     )}
                 </div>
-                <button type="submit" onClick={handleClick}>Crear Poke</button>
+                { 
+                    err.hasOwnProperty("name") ? undefined : <button type="submit" onClick={handleClick}>Crear Poke</button>
+                    
+                }
             </form>
         </div>
     )
