@@ -37,7 +37,11 @@
   }
 }
 
-.img{
-  weight : 100px;
-  height : 100px
+.imgEnter{
+  width : 750px;
+  height : 330px;
+}
+
+ul{
+  list-style: none;
 }

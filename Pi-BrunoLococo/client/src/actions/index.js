@@ -100,3 +100,14 @@ export function cleanSearch () {
         payload : {}
     }
 }
+
+export function getDetail (id) {
+    return function (dispatch) {
+        fetch("http://localhost:3001/pokemons/" + id)
+            .then(obj => obj.json())
+            .then(obj => dispatch({
+                    type : "GET_DETAIL",
+                    payload : obj
+            }))
+    }
+}

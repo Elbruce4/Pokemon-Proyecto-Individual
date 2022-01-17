@@ -1,0 +1,14 @@
+
+.img{
+    width : 180px;
+    height: 120px;
+    margin: 2px;
+}
+
+.poke{
+    margin: 5px;
+    padding: 3px;
+    width: 30%;
+    border: #666 solid 2px;
+    border-radius: 10px;
+}

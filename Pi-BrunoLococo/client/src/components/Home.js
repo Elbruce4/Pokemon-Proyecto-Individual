@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import Paginado from "./Paginado"
 import cargando from "../pics/cargando.gif"
 import NavBar from "./Nav"
+import "./Home.css"
 
 
 const Home = () => {
@@ -28,7 +29,6 @@ const Home = () => {
 
     let dispatch = useDispatch();
 
-    let [onePoke , setOnePoke] = useState();
     let [refresh , setRefresh] = useState()
     
     useEffect(()=>{
@@ -44,15 +44,6 @@ const Home = () => {
 
     },[dispatch]);
 
-    function handleChange (e) {
-        setOnePoke(e.target.value);
-        //dispatch(getOnePoke(e.target.value))
-    }
-
-    function handleClick () {
-        dispatch(getOnePoke(onePoke))
-        //getOnePoke()
-    }
 
     function handleFilterByType (e) {
         console.log(e.target.value)
@@ -80,64 +71,52 @@ const Home = () => {
     return (
         <div>
             <NavBar/>
-            <input type="text" placeholder="Buscar nombre exacto" onChange={handleChange}/>
-            <Link to="/search">
-                <button onClick={handleClick}>Buscar Pokemones</button>
-            </Link>
-            <div>
-                <select onClick={handleFilterByName}>
-                    <option value="asc">A-Z</option>
-                    <option value="desc">Z-A</option>
-                </select>
-                <select onClick={handleFilterByOrigin}>
-                    <option value=" ">Filtrar por creación</option>
-                    <option value="All">Todos</option>
-                    <option value="Db">Creado en DB</option>
-                    <option value="Api">Poke existente</option>
-                </select>
-                <select name="" id="" onClick={handleFilterByStrong}>
-                    <option value=" ">Ordenar por fuerza</option>
-                    <option value="+">+</option>
-                    <option value="-">-</option>
-                </select>
-                <select onClick={handleFilterByType}>
-                    <option value=" ">Todos</option>
-                {
-                    pokeTypes && pokeTypes.map(obj=>{
-                        return <option value={obj.name}  key={obj.id}>{obj.name}</option>
-                               
-                    })
-                }
-                </select>
-                
+            <div className="menu">
+            
+                <div className="filter">
+                    <select onClick={handleFilterByName} className="filtros">
+                        <option value=" ">Ordenar por nombre</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                    </select>
+                    <select name="" id="" onClick={handleFilterByStrong} className="filtros">
+                        <option value=" ">Ordenar por fuerza</option>
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                    </select>
+                    <select onClick={handleFilterByOrigin} className="filtros">
+                        <option value=" ">Filtrar por creación</option>
+                        <option value="All">Todos</option>
+                        <option value="Db">Creado en DB</option>
+                        <option value="Api">Poke existente</option>
+                    </select>
+                    <select onClick={handleFilterByType} className="filtros">
+                        <option value=" ">Buscar por tipo</option>
+                    {
+                        pokeTypes && pokeTypes.map(obj=>{
+                            return <option value={obj.name}  key={obj.id}>{obj.name}</option>
+                                
+                        })
+                    }
+                    </select>
+                    
+                </div>
+
             </div>
-
-            <Paginado paginado={paginado} pokemons={pokemons.length} pokexPagina={pokexPagina} />
-
-            {
-                pokemonesActuales.length > 0 ? pokemonesActuales.map(obj=>{
-                   return <Pokemon name={obj.name} life={obj.life} strong={obj.strong} defense={obj.defense} speed={obj.speed} 
-                   height={obj.height} weight={obj.weight} key={obj.ID} img={obj.img} types={obj.types}/>
-                }) : <img src={cargando}/>
-            }
+            
+            <div className="pokemons">
+                {
+                    pokemonesActuales.length > 0 ? pokemonesActuales.map(obj=>{
+                    return <Pokemon name={obj.name} life={obj.life} strong={obj.strong} defense={obj.defense} speed={obj.speed} 
+                    height={obj.height} weight={obj.weight} key={obj.ID} img={obj.img} types={obj.types} id={obj.ID} className="onePoke"/>
+                    }) : <img src={cargando} className="loading"/>
+                }
+                <Paginado paginado={paginado} pokemons={pokemons.length} pokexPagina={pokexPagina} />
+            </div>
             
         </div>
         
     )
 }
-/* 
-const mapState = (state) => {
-    return {
-        pokemons : state.pokemons
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getAllPokemones : () => {dispatch(getAllPoke())}
-    }
-}
-
-export default connect(mapState , mapDispatchToProps)(Home); */
 
 export default Home

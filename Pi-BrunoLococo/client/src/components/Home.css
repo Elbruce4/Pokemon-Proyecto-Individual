@@ -1,0 +1,66 @@
+
+
+
+
+.pokemons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    float: right;
+    width: 70%;
+    background-color: #ddd;
+    margin-right: 10px;
+    border-top-left-radius: 50px 75px;
+    border-bottom-right-radius: 50px 100px;
+}
+
+
+.loading{
+    width: 50px;
+    height: 50px;
+    margin-left: 300px;
+    margin-top: 50px;
+}
+
+.menu{
+    display: flex;
+    flex-wrap: row;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    background-color: #ddd;
+    border-radius: 15px;
+    width: 250px;
+    position: fixed;
+    height: 60%;
+}
+
+.filtros{
+    margin: 15px;
+    padding: 4px;
+}
+
+.filter{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+    margin-bottom: 400px;
+}
+
+.paginado{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 170px;
+    margin-left: 190px;
+}
+
+.imgHome{
+    width: 100px;
+    height: 70px;
+    position:relative;
+}
+

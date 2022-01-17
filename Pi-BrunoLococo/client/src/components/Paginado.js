@@ -9,7 +9,7 @@ const Paginado = ({paginado , pokexPagina , pokemons}) => {
     }
 
     return (
-        <ul>
+        <ul className="paginado">
             {
                 arrayPoke && arrayPoke.map(num =>{
                     return <li key={num} onClick={()=>paginado(num)}>

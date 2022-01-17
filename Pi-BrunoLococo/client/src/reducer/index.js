@@ -60,29 +60,36 @@ function rootReducer (state = initialState , action) {
                 pokemon : action.payload
             }
         case "FILTER_BY_NAME":
-            let orderPokes = action.payload === "asc" ? 
-            state.allPokemons.sort((a , b) =>{
-                if (a.name > b.name) {
-                    return 1;
-                } else if (a.name < b.name) {
-                    return -1;
-                } else {
-                    return 0
+            if(action.payload === " "){
+                return {
+                    ...state,
+                    pokemons : state.allPokemons
                 }
-            }) : 
-            state.allPokemons.sort((a , b) =>{
-                if (a.name > b.name) {
-                    return -1;
-                } else if (a.name < b.name) {
-                    return 1;
-                } else {
-                    return 0
-                }
-            })
-            return {
-                ...state,
-                pokemons : orderPokes
-            }      
+            } else {
+                let orderPokes = action.payload === "asc" ? 
+                state.allPokemons.sort((a , b) =>{
+                    if (a.name > b.name) {
+                        return 1;
+                    } else if (a.name < b.name) {
+                        return -1;
+                    } else {
+                        return 0
+                    }
+                }) : 
+                state.allPokemons.sort((a , b) =>{
+                    if (a.name > b.name) {
+                        return -1;
+                    } else if (a.name < b.name) {
+                        return 1;
+                    } else {
+                        return 0
+                    }
+                })
+                return {
+                    ...state,
+                    pokemons : orderPokes
+                }      
+            }
         case "FILTER_BY_STRONG":
             if (action.payload === " ") return {...state, pokemons : state.allPokemons}
             let stronger = action.payload === "-" ? 
@@ -107,6 +114,11 @@ function rootReducer (state = initialState , action) {
             return {
                 ...state,
                 pokemons : stronger
+            }
+        case "GET_DETAIL" :
+            return {
+                ...state,
+                pokemon : action.payload
             }
             default: return {...state};
     }
