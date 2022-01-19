@@ -11,4 +11,10 @@
     width: 30%;
     border: #666 solid 2px;
     border-radius: 10px;
+    transition: transform .2s;
+}
+
+.poke:hover{
+    background-color: #ccc;
+    transform: scale(1.1)
 }

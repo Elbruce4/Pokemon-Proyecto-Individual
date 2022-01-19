@@ -35,6 +35,7 @@ const Detail = (props) => {
                 <p>Velocidad : {pokemon.speed}</p>
                 <p>Peso : {pokemon.weight}</p>
                 <p>Altura : {pokemon.height}</p>
+                <p>HP :{pokemon.life}</p>
                 <img src={pokemon.img} className="img" />
 
             </div> : <img src={cargando} className="img" />

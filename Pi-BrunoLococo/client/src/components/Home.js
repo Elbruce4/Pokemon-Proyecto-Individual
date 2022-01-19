@@ -8,6 +8,8 @@ import Paginado from "./Paginado"
 import cargando from "../pics/cargando.gif"
 import NavBar from "./Nav"
 import "./Home.css"
+import alakazan from "../pics/alakazan.png"
+import golem from "../pics/golem.png"
 
 
 const Home = () => {
@@ -100,6 +102,11 @@ const Home = () => {
                     }
                     </select>
                     
+                </div>
+
+                <div className="relleno">
+                    <img src={golem} className="golem" />
+                    <img src={alakazan} className="alakazan" />
                 </div>
 
             </div>

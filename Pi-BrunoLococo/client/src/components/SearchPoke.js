@@ -13,40 +13,38 @@ const SearchPoke = () => {
 
     useEffect(()=> () => { return dispatch(cleanSearch()) } ,[])
 
-    /* 
-    
-    */
+    const style = {
+        backgroundImage : "poke.img"
+    }
 
     return (
         <div>
             <NavBar></NavBar>
-            <div className="detail">
+            <div className="detail" style={style}>
 
             { 
-                
-                !poke.hasOwnProperty("name") ? <img src={cargando} /> : 
-                
-                <div>
-                    {poke.name}
-                    <br />
-                    <img src={poke.img} className="img" />
-                    <br />
-                    Código : {poke.ID}
-                    <br />
-                    Vida : {poke.life}
-                    <br />
-                    Fuerza : {poke.strong}
-                    <br />
-                    Defensa : {poke.defense}
-                    <br />
-                    Velocidad : {poke.speed}
-                    <br />
-                    Altura : {poke.height}
-                    <br />
-                    Peso : {poke.weight} 
-                </div>  
-                
-                } 
+                    !poke.hasOwnProperty("name") ? 
+                    <img src={cargando} /> : 
+                    <div>
+                        {poke.name}
+                        <br />
+                        <img src={poke.img} className="img" />
+                        <br />
+                        Código : {poke.ID}
+                        <br />
+                        Vida : {poke.life}
+                        <br />
+                        Fuerza : {poke.strong}
+                        <br />
+                        Defensa : {poke.defense}
+                        <br />
+                        Velocidad : {poke.speed}
+                        <br />
+                        Altura : {poke.height}
+                        <br />
+                        Peso : {poke.weight} 
+                    </div>  
+                }
 
             </div>
         </div>

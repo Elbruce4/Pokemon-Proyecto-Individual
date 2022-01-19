@@ -1,7 +1,6 @@
 
 
 
-
 .pokemons{
     display: flex;
     flex-direction: row;
@@ -10,11 +9,12 @@
     flex-wrap: wrap;
     float: right;
     width: 70%;
-    background-color: #ddd;
+    background-color: #eee;
     margin-right: 10px;
-    border-top-left-radius: 50px 75px;
+    border-top-left-radius: 20px 50 px;
     border-bottom-right-radius: 50px 100px;
 }
+
 
 
 .loading{
@@ -30,16 +30,22 @@
     flex-direction: column;
     justify-content: flex-start;
     box-sizing: border-box;
-    background-color: #ddd;
+    background-color: #eee;
     border-radius: 15px;
     width: 250px;
     position: fixed;
     height: 60%;
+   /*  background-image: url("../pics/ash.jpg");
+    background-size: 250px; */
 }
 
 .filtros{
     margin: 15px;
     padding: 4px;
+}
+
+.filtros:hover{
+    background-color: yellow;
 }
 
 .filter{
@@ -48,6 +54,8 @@
     flex-direction: column;
     height: 100%;
     margin-bottom: 400px;
+    position: absolute;
+    z-index: 2;
 }
 
 .paginado{
@@ -62,5 +70,26 @@
     width: 100px;
     height: 70px;
     position:relative;
+}
+
+.relleno{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.alakazan{
+    margin-top: 200px;
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    z-index: 1;
+}
+
+.golem{
+    margin-right: 50px;
+    width: 200px;
+    height: 115px;
+    z-index: 1;
 }
 

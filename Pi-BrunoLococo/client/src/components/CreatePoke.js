@@ -12,13 +12,13 @@ const CreatePoke = () => {
 
     let [form , setForm] = useState({
         name : "",
-        life : "",
+        life : 0,
         types : [],
-        strong : "",
-        defense : "",
-        speed : "",
-        height : "",
-        weight : "",
+        strong : 0,
+        defense : 0,
+        speed : 0,
+        height : 0,
+        weight : 0,
         img : "",
     })
 
