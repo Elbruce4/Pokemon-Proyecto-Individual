@@ -118,7 +118,9 @@ const Home = () => {
                     height={obj.height} weight={obj.weight} key={obj.ID} img={obj.img} types={obj.types} id={obj.ID} className="onePoke"/>
                     }) : <img src={cargando} className="loading"/>
                 }
+
                 <Paginado paginado={paginado} pokemons={pokemons.length} pokexPagina={pokexPagina} />
+                
             </div>
             
         </div>
